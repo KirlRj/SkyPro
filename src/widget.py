@@ -13,6 +13,5 @@ def mask_account_card(card_number: str) -> str:
         mask_number = get_mask_card_number(number)
     return f"{name} {mask_number}"
 
-print (mask_account_card(("Maestro 1596837868705199")))
 
 
