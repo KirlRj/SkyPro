@@ -17,4 +17,4 @@ def get_mask_account(card_number: str) -> str:
     elif not card_number.isdigit():
         return "В номере карты есть буквы!"
     else:
-        return f"**{card_number[12:]}"
+        return f"**{card_number[-4:]}"
