@@ -6,6 +6,11 @@ def mask_account_card(card_number: str) -> str:
     number = card_number[-1]
     name = card_number[:-1]
     if  name.lower().startswith(("счет", "счёт")):
-        mask_number = f
+        mask_number = get_mask_account(number)
+    else:
+        mask_number = get_mask_card_number(number)
+    return f"{name} {mask_number}"
+
+
 
 
