@@ -7,7 +7,7 @@ def mask_account_card(card_number: str) -> str:
     number = info[-1]
     name = " ".join(info[:-1])
 
-    if  name.lower().startswith(("счет", "счёт")):
+    if name.lower().startswith(("счет", "счёт")):
         mask_number = get_mask_account(number)
     else:
         mask_number = get_mask_card_number(number)
