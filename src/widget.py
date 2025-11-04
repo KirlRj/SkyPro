@@ -14,4 +14,6 @@ def mask_account_card(card_number: str) -> str:
     return f"{name} {mask_number}"
 
 
-
+def get_date(data: str) -> str:
+    """Функиця возвращает строку с датой в формате "ДД.ММ.ГГГГ" """
+    return f"{data[8:10].data[5:7].data[0:4]}"
