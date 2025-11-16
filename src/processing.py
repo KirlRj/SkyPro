@@ -12,5 +12,6 @@ def filter_by_state(dict_list: List[Dict[str, Any]], state: str = "EXECUTED") ->
 
 
 def sort_by_date(dict_list: List[Dict[str, Any]], sort: bool = True) -> List[Dict[str, Any]]:
+    """функция сортирует список словарей по дате. По умолчанию - убывание."""
     sorted_list = sorted(dict_list, key=lambda item: datetime.fromisoformat(item["date"]), reverse=sort)
     return sorted_list
