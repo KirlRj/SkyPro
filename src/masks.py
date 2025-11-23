@@ -4,7 +4,7 @@ def get_mask_card_number(card_number: str) -> str:
     if not card_number.isdigit():
         return "В номере карты должны быть только цифры!"
     if len(card_number) != 16:
-            return "В номере карты должно быть 16 цифр!"
+        return "В номере карты должно быть 16 цифр!"
     return f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
 
 
