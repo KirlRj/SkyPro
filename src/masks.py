@@ -11,9 +11,9 @@ def get_mask_card_number(card_number: str) -> str:
 def get_mask_account(card_number: str) -> str:
     """Функция возвращает маску номера счета по правилу **XXXX."""
 
-    if len(card_number) != 20:
-        return "Введено неверное количество символов в номере счета!"
-    elif not card_number.isdigit():
-        return "В номере карты есть буквы!"
+    if not card_number.isdigit():
+        return "В номере счета должны быть только цифры!"
+    elif len(card_number) != 20:
+        return "В номере счета должно быть 20 цифр!"
     else:
         return f"**{card_number[-4:]}"
