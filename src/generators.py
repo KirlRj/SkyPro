@@ -9,6 +9,7 @@ def filter_by_currency(transactions: list, currency: str) -> Any:
 
 
 def transaction_descriptions(transactions: list) -> Any:
+    """Функция, возвращающая описание операции"""
     for transaction in transactions:
         yield transaction.get("description", {})
 
