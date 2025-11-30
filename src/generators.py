@@ -17,7 +17,7 @@ def transaction_descriptions(transactions: list) -> Any:
 def card_number_generator(start: int, end: int) -> Any:
     """Функция, генерирующая номера карт по порядку"""
     if len(str(start)) > 16 or len(str(end)) > 16:
-        print("Номер карты больше 16 цифр!")
+        raise ValueError("Номер карты больше 16 цифр!")
     else:
         for number in range(start, end + 1):
             numcard = str(number).zfill(16)

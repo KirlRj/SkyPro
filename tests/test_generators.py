@@ -77,22 +77,27 @@ def test_transaction_descriptions(all_transactions: List[dict]) -> None:
     ]
 
 
-def test_card_number_generator_range() -> None:
-    gen = card_number_generator(9, 11)
-    cards = list(gen)
+@pytest.mark.parametrize(
+    "start, stop, expected",
+    [
+        (1, 2, ["0000 0000 0000 0001", "0000 0000 0000 0002"]),
+        (2, 5, ["0000 0000 0000 0002", "0000 0000 0000 0003", "0000 0000 0000 0004", "0000 0000 0000 0005"]),
+    ],
+)
+def test_card_number_generator_range(start: int, stop: int, expected: List[str]) -> None:
+    result = list(card_number_generator(start, stop))
+    assert result == expected
 
-    assert cards == [
-        "0000 0000 0000 0009",
-        "0000 0000 0000 0010",
-        "0000 0000 0000 0011",
-    ]
+
+@pytest.mark.parametrize(
+    "start, stop",
+    [
+        (10**16, 1),
+        (1, 10**16),
+    ],
+)
 
 
-def test_card_number_generator_too_long(capsys: pytest.CaptureFixture) -> None:
-    gen = card_number_generator(123456789012345687, 10)
-
-    cards = list(gen)
-    assert cards == []
-
-    captured = capsys.readouterr()
-    assert "Номер карты больше 16 цифр!" in captured.out
+def test_card_number_generator_too_long(start: int, stop: int) -> None:
+    with pytest.raises(ValueError, match="Номер карты больше 16 цифр!"):
+        list(card_number_generator(10**16, 1))
