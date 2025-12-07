@@ -1,10 +1,13 @@
-import pytest
 from pathlib import Path
+from typing import Any
+
+import pytest
+
 from src.decorators import log
 from src.masks import get_mask_card_number
 
 
-def test_log_print_success(capsys):
+def test_log_print_success(capsys: Any) -> None:
     decorated = log()(get_mask_card_number)
     result = decorated("1234567812345678")
 
@@ -16,8 +19,7 @@ def test_log_print_success(capsys):
     assert "Передаваемые данные в функцию get_mask_card_number: ('1234567812345678',), {}" in captured.out
 
 
-
-def test_log_print_error(capsys):
+def test_log_print_error(capsys: Any) -> None:
     decorated = log()(get_mask_card_number)
     with pytest.raises(ValueError):
         decorated("1234abcd12345678")
@@ -27,7 +29,7 @@ def test_log_print_error(capsys):
     assert "Ошибка выполнения функции! Ошибка: В номере карты должны быть только цифры!" in captured.out
 
 
-def test_log_file(tmp_path: Path):
+def test_log_file(tmp_path: Path) -> None:
     log_file = tmp_path / "log.txt"
 
     decorated = log(str(log_file))(get_mask_card_number)

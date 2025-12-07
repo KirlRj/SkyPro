@@ -4,6 +4,7 @@ from functools import wraps
 from time import time
 from typing import Any, Callable, Optional
 
+
 # декоратор логов
 def log(filename: Optional[str] = None) -> Callable:
 
