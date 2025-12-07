@@ -56,4 +56,4 @@ def mask_card_number(card_number: str) -> str:
     return get_mask_card_number(card_number=card_number)
 
 
-print(mask_card_number("1313131313131313"))
+print(mask_card_number("1313131313131313131"))
