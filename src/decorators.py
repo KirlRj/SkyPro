@@ -4,9 +4,6 @@ from functools import wraps
 from time import time
 from typing import Any, Callable, Optional
 
-from src.masks import get_mask_card_number
-
-
 # декоратор логов
 def log(filename: Optional[str] = None) -> Callable:
 
@@ -14,6 +11,7 @@ def log(filename: Optional[str] = None) -> Callable:
         @wraps(function)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
 
+            error = None
             time_start = time()
             start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             chapter = "=" * 100
@@ -26,6 +24,7 @@ def log(filename: Optional[str] = None) -> Callable:
                 end_data_log = f"Результат выполнения функции {function.__name__}: {result}"
             except Exception as e:
                 result = None
+                error = e
                 status = f"Ошибка выполнения функции! Ошибка: {e}"
                 end_data_log = "Функция завершилась с ошибкой. Результаты не получены."
 
@@ -44,16 +43,11 @@ def log(filename: Optional[str] = None) -> Callable:
             else:
                 print(logs)
 
+            if error:
+                raise error
+
             return result
 
         return wrapper
 
     return decorator
-
-
-@log("log.txt")
-def mask_card_number(card_number: str) -> str:
-    return get_mask_card_number(card_number=card_number)
-
-
-print(mask_card_number("1313131313131313131"))
