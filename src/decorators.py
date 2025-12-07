@@ -1,4 +1,5 @@
 # Импорт библиотек
+import traceback
 from datetime import datetime
 from functools import wraps
 from time import time
@@ -15,21 +16,28 @@ def log(filename=None):
 
             time_start = time()
             start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            chapter = "="*100
             start_data_log = f"Передаваемые данные в функцию {function.__name__}: {args}, {kwargs}"
             start_time_log = f"Начало выполнения функции {function.__name__} - {start}"
 
-            result = function(*args, **kwargs)
+            try:
+                result = function(*args, **kwargs)
+                status = f"Функция {function.__name__} выполнена 'Успешно'!"
+                end_data_log = f"Результат выполнения функции {function.__name__}: {result}"
+            except Exception as e:
+                result = None
+                status = f"Ошибка выполнения функции! Ошибка: {e}"
+                end_data_log = ""
 
             time_end = time()
             end = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             end_time_log = f"Окончание выполнения функции {function.__name__} - {end}"
-            end_data_log = f"Результат выполнения функции {function.__name__}: {result}"
             time_function = f"Выполнение функции заняло {time_end - time_start:.7f} секунд"
 
-            logs = "\n".join([start_data_log, start_time_log, end_time_log, time_function, end_data_log])
+            logs = "\n".join([chapter, start_data_log, start_time_log, end_time_log, time_function, status, end_data_log, chapter])
 
             if filename:
-                with open(filename, "a") as f:
+                with open(filename, "a",encoding= "utf-8") as f:
                     f.write(logs + "\n")
             else:
                 print(logs)
@@ -41,9 +49,9 @@ def log(filename=None):
     return decorator
 
 
-@log()
+@log("log.txt")
 def mask_card_number(card_number: str) -> str:
     return get_mask_card_number(card_number=card_number)
 
 
-print(mask_card_number("1234561234561313"))
+print(mask_card_number("1313131313131313"))
