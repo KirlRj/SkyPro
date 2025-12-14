@@ -3,13 +3,13 @@ import os
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
-
-api_key = os.getenv("API_KEY")
-api_url = os.getenv("API_URL")
-
 
 def transfer_currency(transaction: dict) -> float:
+    load_dotenv()
+
+    api_key = os.getenv("API_KEY")
+    api_url = os.getenv("API_URL")
+
     if not api_url:
         raise ValueError("API_URL не определен!")
     if not api_key:
