@@ -96,8 +96,6 @@ def test_card_number_generator_range(start: int, stop: int, expected: List[str])
         (1, 10**16),
     ],
 )
-
-
 def test_card_number_generator_too_long(start: int, stop: int) -> None:
     with pytest.raises(ValueError, match="Номер карты больше 16 цифр!"):
         list(card_number_generator(10**16, 1))
