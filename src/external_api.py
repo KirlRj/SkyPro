@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 
 def transfer_currency(transaction: dict) -> float:
+    """функция выводит сумму операции. если валюта не RUB, то обращается к API"""
     load_dotenv()
 
     api_key = os.getenv("API_KEY")
