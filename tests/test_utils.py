@@ -1,6 +1,7 @@
 from unittest.mock import mock_open, patch
 
-from src.utils import read_json
+with patch("builtins.open", mock_open()):
+    from src.utils import read_json
 
 
 def test_read_json_success() -> None:
