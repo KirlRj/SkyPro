@@ -4,7 +4,7 @@ from typing import Any, Dict, List
 
 
 def process_bank_search(transactions: List[Dict[str, Any]], search: str) -> list[dict]:
-    """функция вывода списка словарей по ключевому слову."""
+    """функция вывода списка словарей по ключевому слову операции."""
     pattern = re.compile(search, re.IGNORECASE)
     result = []
 
