@@ -1,9 +1,9 @@
 import re
 from collections import Counter
-from typing import Any
+from typing import Any, Dict, List
 
 
-def process_bank_search(transactions: list[dict], search: str) -> list[dict]:
+def process_bank_search(transactions: List[Dict[str, Any]], search: str) -> list[dict]:
     """функция вывода списка словарей по ключевому слову."""
     pattern = re.compile(search, re.IGNORECASE)
     result = []
@@ -16,7 +16,7 @@ def process_bank_search(transactions: list[dict], search: str) -> list[dict]:
     return result
 
 
-def count_bank_operations(transactions: list[dict]) -> Counter[Any]:
+def count_bank_operations(transactions: List[Dict[Any, Any]]) -> Counter[Any]:
     """функция подсчета операций по категориям"""
     data = []
 
