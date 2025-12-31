@@ -1,13 +1,16 @@
 from pathlib import Path
 from typing import Any
+from unittest.mock import mock_open, patch
+
+with patch("builtins.open", mock_open()):
+    from src.decorators import log
+    from src.masks import get_mask_card_number
 
 import pytest
 
-from src.decorators import log
-from src.masks import get_mask_card_number
-
 
 def test_log_print_success(capsys: Any) -> None:
+
     decorated = log()(get_mask_card_number)
     result = decorated("1234567812345678")
 
