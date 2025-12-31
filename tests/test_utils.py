@@ -30,7 +30,7 @@ def test_read_json_file_not_found() -> None:
     """тест с ненайденным файлом"""
 
     with patch("builtins.open", side_effect=FileNotFoundError):
-        result = read_json("fake_file.json")
+        result = read_json("file.json")
         assert result == []
 
 
@@ -39,12 +39,12 @@ def test_read_json_not_list() -> None:
 
     mock_data = '{"id": 1}'
     with patch("builtins.open", mock_open(read_data=mock_data)):
-        result = read_json("fake_file.json")
+        result = read_json("file.json")
         assert result == []
 
 
 def test_read_csv_basic() -> None:
-    mock_data = "name,price\nApple,120\nBanana,90\n"
+    mock_data = "name;price\nApple;120\nBanana;90\n"
     expected = [{"name": "Apple", "price": "120"}, {"name": "Banana", "price": "90"}]
 
     with patch("builtins.open", mock_open(read_data=mock_data)) as mock_file:

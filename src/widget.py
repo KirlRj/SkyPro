@@ -6,7 +6,7 @@ from src.masks import get_mask_account, get_mask_card_number
 def mask_account_card(card_number: str) -> str:
     """Функция возвращает маску. Для карты XXXX XX** **** XXXX. Для счета **XXXX"""
 
-    if not card_number or type(card_number) != str or card_number.strip() == "":
+    if not card_number or type(card_number) == float or card_number.strip() == "":
         return ""
 
     info = card_number.split()
@@ -27,6 +27,7 @@ def mask_account_card(card_number: str) -> str:
     except Exception:
         mask_number = number
     return f"{name} {mask_number}".strip()
+
 
 def get_date(date_str: str) -> str:
     """Функция преобразует дату в формат 'DD.MM.YYYY'"""

@@ -26,7 +26,7 @@ if __name__ == "__main__":
             data = read_excel(Path("data") / "transactions_excel.xlsx")
         else:
             continue
-        print("Прочитанные данные:", data)
+
         correct_status = ["EXECUTED", "CANCELED", "PENDING"]
         input_status = None
         while input_status not in correct_status:
@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 input_status = input_status.strip().upper()
 
         data = filter_by_state(data, input_status)
-        print("Прочитанные данные:", data)
+
         while True:
             print("Отсортировать операции по дате? Да/Нет")
             answer_1 = str(input())
@@ -74,7 +74,7 @@ if __name__ == "__main__":
             else:
                 print(f"функции {answer_3} не существует")
                 continue
-        print("Прочитанные данные:", data)
+
         while True:
             print("Отфильтровать список транзакций по определенному слову в описании?")
             answer_4 = str(input())
@@ -88,7 +88,7 @@ if __name__ == "__main__":
             else:
                 print(f"функции {answer_4} не существует")
                 continue
-        print("Прочитанные данные:", data)
+
         if len(data) == 0:
             print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
         else:

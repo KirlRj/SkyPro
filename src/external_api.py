@@ -31,6 +31,6 @@ def transfer_currency(transaction: dict) -> float:
         }
         response = requests.get(api_url, params=params, headers=headers)
 
-        return round(float(response.json().get("result",0)), 2)
+        return round(float(response.json().get("result", 0)), 2)
     else:
         return float(amount)
