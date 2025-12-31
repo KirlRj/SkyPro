@@ -16,16 +16,21 @@ def transfer_currency(transaction: dict) -> float:
     if not api_key:
         raise ValueError("API_KEY не определен")
 
-    operation = transaction["operationAmount"]
-    amount = float(operation["amount"])
-    currency = operation["currency"]
+    operation = transaction.get("operationAmount")
+    if operation:
+        amount = float(operation.get("amount", 0))
+        currency_code = operation.get("currency", {}).get("code", "RUB")
+    else:
+        amount = float(transaction.get("amount", 0))
+        currency_code = transaction.get("currency_code", "RUB")
 
-    if currency["code"] != "RUB":
-        params = {"from": currency["code"], "to": "RUB", "amount": amount}
+    if currency_code != "RUB":
+        params = {"from": currency_code, "to": "RUB", "amount": amount}
         headers = {
             "apikey": api_key,
         }
         response = requests.get(api_url, params=params, headers=headers)
-        return round(float(response.json()["result"]), 2)
+
+        return round(float(response.json().get("result",0)), 2)
     else:
         return float(amount)

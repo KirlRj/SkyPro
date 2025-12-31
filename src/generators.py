@@ -3,8 +3,17 @@ from typing import Any
 
 def filter_by_currency(transactions: list, currency: str) -> Any:
     """Функция, возвращающая по очереди транзакции, по ключу currency"""
+
     for transaction in transactions:
-        if transaction.get("operationAmount", {}).get("currency", {}).get("name") == currency:
+        file_currency = transaction.get("currency_code")
+        json_currency = (
+            transaction
+            .get("operationAmount", {})
+            .get("currency", {})
+            .get("code")
+        )
+
+        if file_currency == currency or json_currency == currency:
             yield transaction
 
 
