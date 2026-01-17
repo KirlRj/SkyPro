@@ -11,8 +11,9 @@ from src.widget import get_date, mask_account_card
         ("Maestro 1111222233334444", "Maestro 1111 22** **** 4444"),
     ],
 )
-def test_mask_account_card(input_str: str, expected_mask: str) -> None:
-    assert mask_account_card(input_str) == expected_mask
+def test_mask_account_card(input_str: str, expected_mask) -> None:
+    result = mask_account_card(input_str)
+    assert result == expected_mask
 
 
 @pytest.mark.parametrize(

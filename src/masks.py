@@ -1,8 +1,9 @@
 import logging
+from pathlib import Path
 
 masks_logger = logging.getLogger(__name__)
 masks_logger.setLevel(logging.DEBUG)
-masks_handler = logging.FileHandler("../logs/masks.log", mode="w", encoding="utf-8")
+masks_handler = logging.FileHandler(Path("src") / "log.txt", mode="w", encoding="utf-8")
 masks_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 masks_handler.setFormatter(masks_formatter)
 masks_logger.addHandler(masks_handler)
